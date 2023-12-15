@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSS Test</title>
+    <style>
+        body{
+            background-color: antiquewhite;
+            text-align: center;
+            line-height: 1;
+            margin:auto;
+        }
+        #image{
+            margin-top: 10px;
+            box-shadow: 5px 5px 5px 5px gray;
+            width: 60px;;
+            padding: 20px;
+            font-weight: 400;
+            padding-bottom: 0px;
+            height: 40px;
+            user-select: none;
+            text-decoration:line-through;
+            font-style: italic;
+            font-size: x-large;
+            border: red 2px solid;
+            margin-left: 10px;
+        }
+        #user-input{
+            box-shadow: 5px 5px 5px 5px gray;
+            width:auto;
+            margin-right: 10px;
+            padding: 10px;
+            padding-bottom: 0px;
+            height: 40px;
+            border: red 0px solid;
+        }
+        input{
+            border:1px black solid;
+        }
+        .inline{
+            display:inline-block;
+        }
+        #btn{
+            box-shadow: 5px 5px 5px grey;
+            color: aqua;
+            margin: 10px;
+            background-color: brown;
+        }
+        #submit{
+            visibility: hidden;
+        }
+    </style>
+<script>
+    let captcha;
+    function generate() {
+    document.getElementById("Check").value = "";
+
+    captcha = document.getElementById("image");
+    let uniquechar = "";
+
+    const randomchar =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 1; i < 5; i++) {
+        uniquechar += randomchar.charAt(
+            Math.random() * randomchar.length)
+    }
+
+    captcha.innerHTML = uniquechar;
+    }
+
+    function printmsg() {
+    const usr_input = document
+        .getElementById("Check").value;
+
+    if (usr_input == captcha.innerHTML) {
+        let s = document.getElementById("key")
+            .innerHTML = "Matched";
+            var button = document.getElementById("submit");
+            button.style.visibility = "visible";
+        generate();
+    }
+    else {
+        let s = document.getElementById("key")
+            .innerHTML = "not Matched";
+        generate();
+    }
+}
+</script>
+</head>
+<body onload="generate()">
+    <p>Имя пользователя</p>
+    <input id="username" placeholder="Alex A.">
+
+    <p>Пароль</p>
+    <input type="password" id="password">
+
+    <p></p>
+    <button type="submit" id="submit">Войти</button>
+    <p></p>
+
+    <div id="user-input" class="inline">
+        <input type="text"
+               id="Check"
+               placeholder="Captcha code" />
+    </div>
+ 
+    <div class="inline" onclick="generate()">
+        <i class="fas fa-sync"></i>
+    </div>
+ 
+    <div id="image"
+         class="inline"
+         selectable="False">
+    </div>
+    <input type="submit"
+           id="btn"
+           onclick="printmsg()" />
+ 
+    <p id="key"></p>
+<script src="Log.js"></script>
+</body>
+</html>
